@@ -50,7 +50,7 @@ func GetMovie(w http.ResponseWriter, r *http.Request) {
 }
 
 // MovieAdd Inser new Movie
-func MovieAdd(w http.ResponseWriter, r *http.Request) {
+func AddMovie(w http.ResponseWriter, r *http.Request) {
 	log.Println("")
 	decoder := json.NewDecoder(r.Body)
 	var movieData models.Movie
@@ -69,7 +69,7 @@ func MovieAdd(w http.ResponseWriter, r *http.Request) {
 }
 
 // Update movie
-func MovieUpdate(w http.ResponseWriter, r *http.Request) {
+func UpdateMovie(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	movieId := params["id"]
 
@@ -96,6 +96,28 @@ func MovieUpdate(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(500)
 	} else {
 		makeMovieResponse(w, 200, movieData)
+	}
+}
+
+func DeleteMovie(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	movieId := params["id"]
+
+	if !bson.IsObjectIdHex(movieId) {
+		w.WriteHeader(404)
+		return
+	}
+
+	oid := bson.ObjectIdHex(movieId)
+
+	err := storage.DeleteMovie(oid)
+
+	if err != nil {
+		w.WriteHeader(500)
+	} else {
+		w.Header().Set("Content-Type", "aplication/json")
+		w.WriteHeader(200)
+		json.NewEncoder(w).Encode(movieId)
 	}
 }
 

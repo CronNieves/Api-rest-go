@@ -30,10 +30,19 @@ func MovieFindOneById(id bson.ObjectId) (models.Movie, error) {
 	return result, err
 }
 
+// UpdateMovie Update movie
 func UpdateMovie(oid bson.ObjectId, movie models.Movie) error {
 	session := getSession()
 	document := bson.M{"_id": oid}
 	change := bson.M{"$set": movie}
 	err := session.DB(dbName).C(movieCollection).Update(document, change)
+	return err
+}
+
+// Delete Movie
+func DeleteMovie(oid bson.ObjectId) error {
+	session := getSession()
+	document := bson.M{"_id": oid}
+	err := session.DB(dbName).C(movieCollection).Remove(document)
 	return err
 }
