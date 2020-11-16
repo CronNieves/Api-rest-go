@@ -1,7 +1,7 @@
 package main
 
 import (
-	"./handlers"
+	"Api-Rest-Go/src/handlers"
 	"github.com/gorilla/mux"
 	"net/http"
 )
@@ -36,15 +36,21 @@ var routes = Routes{
 		handlers.Index,
 	},
 	Route{
-		"movies",
+		"moviesList",
 		"GET",
 		"/movies",
 		handlers.GetMovieList,
 	},
 	Route{
-		"movies",
+		"moviesGet",
 		"GET",
 		"/movie/{id}",
 		handlers.GetMovie,
+	},
+	Route{
+		"moviesAdd",
+		"POST",
+		"/movie",
+		handlers.MovieAdd,
 	},
 }
