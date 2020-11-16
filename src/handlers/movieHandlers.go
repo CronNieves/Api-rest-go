@@ -4,20 +4,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/CronNieves/Api-rest-go/src/models"
+	"github.com/CronNieves/Api-rest-go/src/storage"
 	"github.com/gorilla/mux"
-	"gopkg.in/mgo.v2"
 	"log"
 	"net/http"
 )
-
-func getSession() *mgo.Session {
-	session, err := mgo.Dial("mongodb://localhost")
-	if err != nil {
-		panic(err)
-	}
-
-	return session
-}
 
 var movies = models.Movies{
 	models.Movie{"IronMan", 2013, "Desconocido"},
@@ -50,7 +41,6 @@ func MovieAdd(w http.ResponseWriter, r *http.Request) {
 
 	defer r.Body.Close()
 
-	log.Println(movie_data)
-	movies = append(movies, movie_data)
+	storage.MovieAdd(movie_data)
 
 }

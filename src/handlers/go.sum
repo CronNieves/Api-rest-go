@@ -1,4 +1,7 @@
 github.com/CronNieves/Api-rest-go v0.0.0-20201116033523-bb59b7e0643b h1:T3g3XVecIIhbRXJ486jrlutP8uxalBD9YtP0wjLzNz8=
 github.com/CronNieves/Api-rest-go v0.0.0-20201116033523-bb59b7e0643b/go.mod h1:L7aqtrJfsfR6xxCgV6urpIfy0t829HKxktiGi5Cvkvg=
+github.com/CronNieves/Api-rest-go v0.0.0-20201116042450-18228b38cdfb h1:BLqEyIBfaBY77nWxGNpF0x0STymwO6E2vhlg4wYW2hs=
 github.com/gorilla/mux v1.8.0 h1:i40aqfkR1h2SlN9hojwV5ZA91wcXFOvkdNIeFDP5koI=
 github.com/gorilla/mux v1.8.0/go.mod h1:DVbg23sWSpFRCP0SfiEN6jmj59UnW/n46BH5rLB71So=
+gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22 h1:VpOs+IwYnYBaFnrNAeB8UUWtL3vEUnzSCL1nVjPhqrw=
+gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22/go.mod h1:yeKp02qBN3iKW1OzL3MGk2IdtZzaj7SFntXj72NppTA=
