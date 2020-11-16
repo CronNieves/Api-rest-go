@@ -1,7 +1,7 @@
 package main
 
 import (
-	"Api-Rest-Go/src/handlers"
+	"github.com/CronNieves/Api-rest-go/src/handlers"
 	"github.com/gorilla/mux"
 	"net/http"
 )

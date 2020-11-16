@@ -1,9 +1,9 @@
 package handlers
 
 import (
-	"Api-Rest-Go/models"
 	"encoding/json"
 	"fmt"
+	"github.com/CronNieves/Api-rest-go/src/models"
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
