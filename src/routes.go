@@ -52,5 +52,10 @@ var routes = Routes{
 		"POST",
 		"/movie",
 		handlers.MovieAdd,
+	}, Route{
+		"movieUpdate",
+		"PUT",
+		"/movie/{id}",
+		handlers.MovieUpdate,
 	},
 }

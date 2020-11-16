@@ -1,4 +1,4 @@
-module Api-Rest-Go/handlers
+module Api-Rest-Go/storage
 
 go 1.15
 
