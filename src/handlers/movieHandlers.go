@@ -5,9 +5,19 @@ import (
 	"fmt"
 	"github.com/CronNieves/Api-rest-go/src/models"
 	"github.com/gorilla/mux"
+	"gopkg.in/mgo.v2"
 	"log"
 	"net/http"
 )
+
+func getSession() *mgo.Session {
+	session, err := mgo.Dial("mongodb://localhost")
+	if err != nil {
+		panic(err)
+	}
+
+	return session
+}
 
 var movies = models.Movies{
 	models.Movie{"IronMan", 2013, "Desconocido"},
