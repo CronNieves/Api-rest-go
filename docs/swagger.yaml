@@ -1,0 +1,118 @@
+basePath: /
+definitions:
+  models.Movie:
+    properties:
+      director:
+        type: string
+      name:
+        type: string
+      year:
+        type: integer
+    type: object
+host: localhost:8070
+info:
+  contact: {}
+  description: Esta es una simple API Rest de peliculas
+  title: Movie API
+  version: "1.0"
+paths:
+  /movie:
+    post:
+      consumes:
+      - application/json
+      description: Obtiene una pelicula por id
+      parameters:
+      - description: New Movie
+        in: body
+        name: Movie
+        required: true
+        schema:
+          $ref: '#/definitions/models.Movie'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Movie'
+      tags:
+      - Movie
+  /movie/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Borra una pelicula por id
+      parameters:
+      - description: Movie ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      tags:
+      - Movie
+    get:
+      consumes:
+      - application/json
+      description: Obtiene una pelicula por id
+      parameters:
+      - description: Movie ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Movie'
+      tags:
+      - Movie
+    put:
+      consumes:
+      - application/json
+      description: Actualiza una pelicula
+      parameters:
+      - description: Movie ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update Movie
+        in: body
+        name: Movie
+        required: true
+        schema:
+          $ref: '#/definitions/models.Movie'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Movie'
+      tags:
+      - Movie
+  /movies:
+    get:
+      description: Obtiene todas las peliculas
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Movie'
+            type: array
+      tags:
+      - Movie
+swagger: "2.0"
