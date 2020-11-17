@@ -16,7 +16,12 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Service unavailable")
 }
 
-// GetMovieList Get all Movie
+// GetMovieList godoc
+// @Description Obtiene todas las peliculas
+// @Tags Movie
+// @Produce  json
+// @Success 200 {object} models.Movies
+// @Router /movies [get]
 func GetMovieList(w http.ResponseWriter, r *http.Request) {
 	var result models.Movies
 	var err error
@@ -29,7 +34,14 @@ func GetMovieList(w http.ResponseWriter, r *http.Request) {
 
 }
 
-// GetMovie Get Movie by Id
+// GetMovie godoc
+// @Description Obtiene una pelicula por id
+// @Tags Movie
+// @Accept  json
+// @Produce  json
+// @Success 200 {object} models.Movie
+// @Param id path string true "Movie ID"
+// @Router /movie/{id} [get]
 func GetMovie(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	movieId := params["id"]
@@ -49,7 +61,14 @@ func GetMovie(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// MovieAdd Inser new Movie
+// AddMovie godoc
+// @Description Obtiene una pelicula por id
+// @Tags Movie
+// @Accept  json
+// @Produce  json
+// @Param Movie body models.Movie true "New Movie"
+// @Success 200 {object} models.Movie
+// @Router /movie [POST]
 func AddMovie(w http.ResponseWriter, r *http.Request) {
 	log.Println("")
 	decoder := json.NewDecoder(r.Body)
@@ -68,7 +87,15 @@ func AddMovie(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// Update movie
+// UpdateMovie godoc
+// @Description Actualiza una pelicula
+// @Tags Movie
+// @Accept  json
+// @Produce  json
+// @Param id path string true "Movie ID"
+// @Param Movie body models.Movie true "Update Movie"
+// @Success 200 {object} models.Movie
+// @Router /movie/{id} [PUT]
 func UpdateMovie(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	movieId := params["id"]
@@ -99,6 +126,14 @@ func UpdateMovie(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// DeleteMovie godoc
+// @Description Borra una pelicula por id
+// @Tags Movie
+// @Accept  json
+// @Produce  json
+// @Success 200 {object} string
+// @Param id path string true "Movie ID"
+// @Router /movie/{id} [delete]
 func DeleteMovie(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	movieId := params["id"]

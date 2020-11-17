@@ -1,8 +1,10 @@
 package main
 
 import (
+	_ "Api-Rest-Go/docs"
 	"github.com/CronNieves/Api-rest-go/src/handlers"
 	"github.com/gorilla/mux"
+	httpSwagger "github.com/swaggo/http-swagger"
 	"net/http"
 )
 
@@ -25,6 +27,9 @@ func newRouter() *mux.Router {
 			Path(route.Pattern).
 			Handler(route.HandleFunc)
 	}
+
+	router.PathPrefix("/swagger").Handler(httpSwagger.WrapHandler)
+
 	return router
 }
 

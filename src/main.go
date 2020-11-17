@@ -5,6 +5,11 @@ import (
 	"net/http"
 )
 
+// @title Movie API
+// @version 1.0
+// @description Esta es una simple API Rest de peliculas
+// @host localhost:8070
+// @BasePath /
 func main() {
 	// Configuracion de Rutas
 	router := newRouter()
