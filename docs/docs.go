@@ -176,6 +176,38 @@ var doc = `{
                     }
                 }
             }
+        },
+        "/uploadFileMovie": {
+            "post": {
+                "description": "Sube un file Movie",
+                "consumes": [
+                    "application/json",
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Movie"
+                ],
+                "parameters": [
+                    {
+                        "type": "file",
+                        "description": "this is a test file",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {

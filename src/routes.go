@@ -67,5 +67,10 @@ var routes = Routes{
 		"DELETE",
 		"/movie/{id}",
 		handlers.DeleteMovie,
-	},
+	}, Route{
+		"uploadFileMovie",
+		"POST",
+		"/uploadFileMovie",
+		handlers.UploadFileMovie,
+},
 }

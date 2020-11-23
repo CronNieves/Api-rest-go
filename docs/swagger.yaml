@@ -115,4 +115,25 @@ paths:
             type: array
       tags:
       - Movie
+  /uploadFileMovie:
+    post:
+      consumes:
+      - application/json
+      - multipart/form-data
+      description: Sube un file Movie
+      parameters:
+      - description: this is a test file
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      tags:
+      - Movie
 swagger: "2.0"

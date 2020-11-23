@@ -4,7 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/CronNieves/Api-rest-go/src/models"
-	"github.com/CronNieves/Api-rest-go/src/storage/mongo"
+	aws "github.com/CronNieves/Api-rest-go/src/storage/aws"
+	mongo "github.com/CronNieves/Api-rest-go/src/storage/mongo"
 	"github.com/gorilla/mux"
 	"gopkg.in/mgo.v2/bson"
 	"log"
@@ -25,7 +26,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 func GetMovieList(w http.ResponseWriter, r *http.Request) {
 	var result models.Movies
 	var err error
-	result, err = storage.MovieList()
+	result, err = mongo.MovieList()
 	if err != nil {
 		w.WriteHeader(500)
 	} else {
@@ -53,7 +54,7 @@ func GetMovie(w http.ResponseWriter, r *http.Request) {
 
 	oid := bson.ObjectIdHex(movieId)
 
-	movie, err := storage.MovieFindOneById(oid)
+	movie, err := mongo.MovieFindOneById(oid)
 	if err != nil {
 		w.WriteHeader(500)
 	} else {
@@ -79,7 +80,7 @@ func AddMovie(w http.ResponseWriter, r *http.Request) {
 	}
 	defer r.Body.Close()
 
-	errorInsert := storage.MovieAdd(movieData)
+	errorInsert := mongo.MovieAdd(movieData)
 	if errorInsert != nil {
 		w.WriteHeader(500)
 	} else {
@@ -117,7 +118,7 @@ func UpdateMovie(w http.ResponseWriter, r *http.Request) {
 
 	defer r.Body.Close()
 
-	err = storage.UpdateMovie(oid, movieData)
+	err = mongo.UpdateMovie(oid, movieData)
 
 	if err != nil {
 		w.WriteHeader(500)
@@ -145,7 +146,7 @@ func DeleteMovie(w http.ResponseWriter, r *http.Request) {
 
 	oid := bson.ObjectIdHex(movieId)
 
-	err := storage.DeleteMovie(oid)
+	err := mongo.DeleteMovie(oid)
 
 	if err != nil {
 		w.WriteHeader(500)
@@ -154,6 +155,45 @@ func DeleteMovie(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(200)
 		json.NewEncoder(w).Encode(movieId)
 	}
+}
+
+// UploadFileMovie godoc
+// @Description Sube un file Movie
+// @Tags Movie
+// @Accept  json
+// @Produce  json
+// @Success 200 {object} string
+// @Param file formData file true  "this is a test file"
+// @Accept multipart/form-data
+// @Router /uploadFileMovie [post]
+func UploadFileMovie(w http.ResponseWriter, r *http.Request){
+
+	// Parse our multipart form, 10 << 20 specifies a maximum
+	// upload of 10 MB files.
+	r.ParseMultipartForm(10 << 20)
+
+	// FormFile returns the first file for the given key `myFile`
+	// it also returns the FileHeader so we can get the Filename,
+	// the Header and the size of the file
+	file, fileHeader, err := r.FormFile("file")
+	if err != nil {
+		fmt.Println("Error Retrieving the File")
+		fmt.Println(err)
+		return
+	}
+	defer file.Close()
+
+	fmt.Printf("Uploaded File: %+v\n", fileHeader.Filename)
+	fmt.Printf("File Size: %+v\n", fileHeader.Size)
+	fmt.Printf("MIME Header: %+v\n", fileHeader.Header)
+
+	aws.UploadFile(file,*fileHeader)
+
+	w.Header().Set("Content-Type", "aplication/json")
+	w.Header().Set("Content-Disposition", "null")
+	w.WriteHeader(200)
+	json.NewEncoder(w).Encode("Exito")
+
 }
 
 func makeMovieResponse(w http.ResponseWriter, status int, results models.Movie) {
@@ -168,3 +208,5 @@ func makeMoviesResponse(w http.ResponseWriter, status int, results models.Movies
 	w.WriteHeader(status)
 	json.NewEncoder(w).Encode(results)
 }
+
+

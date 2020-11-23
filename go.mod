@@ -11,6 +11,7 @@ require github.com/CronNieves/Api-rest-go/src/models v0.0.0
 require (
 	github.com/CronNieves/Api-rest-go/src/storage v0.0.0
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
+	github.com/aws/aws-sdk-go v1.35.31 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.0 // indirect
 	github.com/go-openapi/jsonpointer v0.19.5 // indirect
 	github.com/go-openapi/spec v0.19.13 // indirect
